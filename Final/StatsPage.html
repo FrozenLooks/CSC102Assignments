@@ -1,0 +1,101 @@
+<!-- Jessup Rolfs, 2022 -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Pulls in various systems and files, and gives the page a name -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Functions.js"></script>
+    <script src="dataLoader-1.js"></script>
+    <script src="dataHelper.js"></script>
+    <link rel="stylesheet" href="Stats.css">
+    <title>UAT Space Statistics</title>
+</head> 
+<!-- Sets up a nice gradient, allowing the non-transparent space logo to stay in the white while having a solid amount of cadet blue -->
+<style>
+    body{
+    background-image: linear-gradient(to right bottom, white, white, cadetblue, cadetblue, cadetblue);
+    }
+</style>
+<!-- When the body loads, the startTime function begins, starting the clock -->
+<body onload=startTime()>
+    <table>
+        <!-- Adds the space picture to the top of the page -->
+        <td><img src="UAT_Space.jpg"></td>
+        <td> 
+            <h1>
+                <!-- Heads the page with a large title -->
+                UAT SPACE PROGRAM
+            </h1>
+        </td>
+    </table>
+    <!-- Sets up the table formatting and gives it values to fill -->
+    <table id="data" border="2" width="70%">
+        <col style="width: 35%;">
+        <col style="width: 35%;">
+        <thead style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" style="font-weight: bolder;">
+            <th>Data type</th>
+            <th>Reading</th>
+        </thead>
+        <tbody style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" style="font-weight:lighter">
+            <tr id="seconds"><td>Time Elapsed:</td><td>15 seconds</td></tr>
+            <tr id="latitude"><td>Latitude:</td><td>0</td></tr>
+            <tr id="longitude"><td>Longitude:</td><td>0</td></tr>
+            <tr id="gpsSensor_alt"><td>GPS Altitude:</td><td>0</td></tr>
+            <tr id="bmpSensor_alt"><td>BMP Altitude:</td><td>30383.04</td></tr>
+            <tr id="bmpSensor_pres"><td>BMP Pressure:</td><td>2.34</td></tr>
+            <tr id="bmpSensor_temp"><td>BMP Temperature:</td><td>0</td></tr>
+            <tr id="digSensor_temp"><td>Digital Sensor Temperature:</td><td>24.12</td></tr>
+            <tr id="cssSensor_temp"><td>CSS Sensor Temperature:</td><td>25</td></tr>
+            <tr id="cssSensor_eco2"><td>CSS Sensor eCO2:</td><td>400</td></tr>
+            <tr id="cssSensor_TVOC"><td>CSS Sensor TVOC:</td><td>0</td></tr>
+            <tr id="UV"><td>UV:</td><td>0</td></tr>
+            <tr id="accelX"><td>Accel X:</td><td>-0.87</td></tr>
+            <tr id="accelY"><td>Accel Y:</td><td>-0.02</td></tr>
+            <tr id="accelZ"><td>Accel Z:</td><td>9.61</td></tr>
+            <tr id="magneticX"><td>Magnetic X:</td><td>0.13</td></tr>
+            <tr id="magneticY"><td>Magnetic Y:</td><td>0.57</td></tr>
+            <tr id="magneticZ"><td>Magnetic Z:</td><td>-0.24</td></tr>
+            <tr id="gyroX"><td>Gyro X:</td><td>4.66</td></tr>
+            <tr id="gyroY"><td>Gyro Y:</td><td>0.01</td></tr>
+            <tr id="gyroZ"><td>Gyro Z:</td><td>-0.4</td></tr>
+        </tbody>
+    </table>
+    <!-- Initializes the dataCounter variable, calls the loadData function, and starts the displayData going every 5 seconds -->
+    <script>
+        var dataCounter = 0;
+        var data = loadData();
+        setInterval(displayData, 5000);
+    </script>
+    <!-- A start and a stop button, see functions.js for more info -->
+    <button id="startButton" onclick="buttonStart()">Start</button> 
+    <button id="stopButton" onclick="buttonStop()">Stop</button>
+    <br><br>
+    <div>The time is:</div>
+    <br><br>
+    <div id="txt"></div>
+    <script> //This is the clock
+        function startTime() {
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+            setTimeout(startTime, 1000);
+        }
+        //Adds a 0 if the value is a single digit for the minute or second place
+        function checkTime(i) {
+            if (i < 10){i = "0" + i};
+            return i;
+        }
+        </script>
+        <!-- neat navigation buttons, let you traverse the 3 html files with no fuss -->
+    <br><br>
+    <button onclick="goToStats()"> Stats Page </button>
+    <button onclick="goToLogin()"> Login Page </button>
+    <button onclick="goToGames()"> Games Page </button>
+</bodyonload=>
+</html>
